@@ -8,6 +8,8 @@ module.exports = cds.service.impl(async function() {
 
     const bupa = await cds.connect.to('API_BUSINESS_PARTNER');
 
+    console.log(` ==========>  passei aqui`);
+
     // Risks('...')?$expand=supplier
     this.on('READ', 'Suppliers', async (req, next) => {
         const select = req.query.SELECT;

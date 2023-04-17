@@ -8,6 +8,7 @@ class CatalogService extends cds.ApplicationService { init(){
   // Reduce stock of ordered books if available stock suffices
   this.on ('submitOrder', async req => {
     const {book,quantity} = req.data
+    console.log("=======> passei submitOrder")
     if (quantity < 1) return req.reject (400,`quantity has to be 1 or more`)
     let b = await SELECT `stock` .from (Books,book)
     if (!b) return req.error (404,`Book #${book} doesn't exist`)
@@ -20,6 +21,7 @@ class CatalogService extends cds.ApplicationService { init(){
 
   // Add some discount for overstocked books
   this.after ('READ', ListOfBooks, each => {
+    console.log("=======> passei read listOfBooks")
     if (each.stock > 111) each.title += ` -- 11% discount!`
   })
 
